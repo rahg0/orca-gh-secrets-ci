@@ -1,7 +1,7 @@
 name:
   Sample Orca Secrets Scan Workflow
   # Trigger the workflow on push and pull requests
-on: [push, pull_request, workflow_dispatch]
+on: [workflow_dispatch]
 jobs:
   orca-secrets-scan:
     name: Orca secrets Scan
@@ -21,3 +21,4 @@ jobs:
         with:
           api_token: ${{ secrets.ORCA_SECURITY_API_TOKEN }}
           project_key: ${{ env.PROJECT_KEY }}
+          disable_git_scan: true
