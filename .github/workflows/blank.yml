@@ -8,12 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROJECT_KEY: slrk
+      
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.event.inputs.branch || github.ref }}
+      - run: git checkout HEAD^  
       
       - name: Orca-CLI binary execution
         run: |
@@ -22,8 +23,8 @@ jobs:
           ls -lah
           curl -sfL 'https://raw.githubusercontent.com/orcasecurity/orca-cli/main/install.sh' | bash -s -- 1.80.0
           orca-cli -v
-          orca-cli -p ${{ env.PROJECT_KEY }} -k ${{ secrets.ORCA_SECURITY_API_TOKEN }} secrets scan ./ --disable-git-scan
-
+          orca-cli -p ${{ env.PROJECT_KEY }} -k ${{ secrets.ORCA_SECURITY_API_TOKEN }} secrets scan ./
+          
       - name: Run Orca Secrets Scan
         uses: orcasecurity/shiftleft-secrets-action@v1
         with:
