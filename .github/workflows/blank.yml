@@ -1,7 +1,7 @@
 name:
   Sample Orca Secrets Scan Workflow
   # Trigger the workflow on push and pull requests
-on: [workflow_dispatch]
+on: [push, workflow_dispatch]
 jobs:
   orca-secrets-scan:
     name: Orca secrets Scan
